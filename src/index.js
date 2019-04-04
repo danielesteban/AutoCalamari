@@ -1,5 +1,10 @@
 const colors = require('colors/safe');
 const dotenv = require('dotenv');
+const {
+  punchIn,
+  punchOut,
+  setupJob,
+} = require('./lib.js');
 
 dotenv.config();
 
@@ -14,11 +19,6 @@ const config = {
   timezone: process.env.TIMEZONE || 'Europe/Madrid',
   headless: process.env.HEADLESS === 'false' ? false : true,
 };
-const {
-  punchIn,
-  punchOut,
-  setupJob,
-} = require('./lib.js');
 
 console.log(colors.blue('Automation FTW!'));
 console.log(colors.white(`${config.email}`));
