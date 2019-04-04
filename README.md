@@ -16,6 +16,7 @@ echo "PASSWORD=__WRITE_YOUR_PASSWORD_HERE__" >> .env
 echo "PUNCH_IN=0 9 * * 1-5" >> .env
 echo "PUNCH_OUT=0 18 * * 1-5" >> .env
 echo "HEADLESS=false" >> .env
+node src/index.js
 ```
 
 #### Deployment
