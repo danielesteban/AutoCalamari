@@ -119,7 +119,7 @@ module.exports.setupJob = ({
             page,
           })
             .then(() => (
-              page.waitFor(config.headless ? 1000 : 3000)
+              page.waitFor(1000)
             ))
             .catch(e => (
               console.error(e.message)
