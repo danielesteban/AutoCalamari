@@ -71,12 +71,12 @@ module.exports.punchIn = ({
   const projectLink = `//a[contains(text(), ${JSON.stringify(project)})]`;
   return page
     .$('button#buttonShift.startWork')
-    .then((isReady) => {
-      if (!isReady) {
+    .then((button) => {
+      if (!button) {
         throw new Error('Error: Already on a shift');
       }
-      return page
-        .click('button#buttonShift')
+      return button
+        .click()
         .then(() => (
           page
             .waitForXPath(projectLink, { visible: true })
@@ -95,12 +95,12 @@ module.exports.punchOut = ({ page }) => {
   console.log(`Clock-out: ${new Date()}`);
   return page
     .$('button#buttonShift.stopWork')
-    .then((isReady) => {
-      if (!isReady) {
+    .then((button) => {
+      if (!button) {
         throw new Error('Error: Not on a shift');
       }
-      return page
-        .click('button#buttonShift');
+      return button
+        .click();
     });
 };
 
@@ -109,22 +109,28 @@ module.exports.setupJob = ({
   action,
   config,
 }) => (
-  new CronJob(time, () => (
-    launchCalamari(config)
-      .then(({ browser, page }) => {
-        action({
-          ...config,
-          page,
+  new CronJob(
+    time,
+    () => setTimeout(() => (
+      launchCalamari(config)
+        .then(({ browser, page }) => {
+          action({
+            ...config,
+            page,
+          })
+            .then(() => (
+              page.waitFor(config.headless ? 1000 : 3000)
+            ))
+            .catch(e => (
+              console.error(e.message)
+            ))
+            .finally(() => (
+              browser.close()
+            ));
         })
-          .then(() => (
-            page.waitFor(3000)
-          ))
-          .catch(e => (
-            console.error(e.message)
-          ))
-          .finally(() => (
-            browser.close()
-          ));
-      })
-  ), null, true, config.timezone)
+    ), Math.random() * config.entropy * 1000),
+    null,
+    true,
+    config.timezone
+  )
 );

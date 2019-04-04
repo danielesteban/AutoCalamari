@@ -10,4 +10,5 @@ services:
      - PASSWORD=__WRITE_YOUR_PASSWORD_HERE__
      - PUNCH_IN=0 9 * * 1-5
      - PUNCH_OUT=0 18 * * 1-5
+     - ENTROPY=300
      - TIMEZONE=Europe/Madrid
