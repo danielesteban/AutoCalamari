@@ -1,13 +1,12 @@
 AutoCalamari
-[![Build Status](https://travis-ci.org/danielesteban/AutoCalamari.svg?branch=master)](https://travis-ci.org/danielesteban/AutoCalamari)
 ===
 
 > Automated Calamari Clock-In/Out
 
-#### Development
-
+[![Build Status](https://travis-ci.org/danielesteban/AutoCalamari.svg?branch=master)](https://travis-ci.org/danielesteban/AutoCalamari)
 [![dependencies Status](https://david-dm.org/danielesteban/AutoCalamari/status.svg)](https://david-dm.org/danielesteban/AutoCalamari)
-[![devDependencies Status](https://david-dm.org/danielesteban/AutoCalamari/dev-status.svg)](https://david-dm.org/danielesteban/AutoCalamari?type=dev)
+
+#### Development
 
 ```bash
 echo "DOMAIN=__WRITE_YOUR_CALAMARI_DOMAIN_HERE__" > .env
@@ -20,5 +19,5 @@ echo "HEADLESS=false" >> .env
 ```
 
 #### Deployment
- * Edit the environment config in: [docker-compose.yml](docker-compose.yml)
+ * Download [docker-compose.yml](docker-compose.yml) & edit the environment config.
  * Launch the [docker container](https://hub.docker.com/r/danigatunes/autocalamari) with: `docker-compose up -d`
