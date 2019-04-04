@@ -19,14 +19,17 @@ const {
   punchOut,
   setupJob,
 } = require('./lib.js');
-console.log(colors.blue('Automation rulez!'));
+
+console.log(colors.blue('Automation FTW!'));
 console.log(colors.white(`${config.email}`));
+
 console.log(colors.green(`Punching in at: ${config.punchIn}`));
 setupJob({
   time: config.punchIn,
   action: punchIn,
   config,
 });
+
 console.log(colors.yellow(`Punching out at: ${config.punchOut}`));
 setupJob({
   time: config.punchOut,
