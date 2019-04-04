@@ -1,0 +1,13 @@
+version: '3'
+services:
+  server:
+    image: danigatunes/autocalamari:latest
+    restart: always
+    environment:
+     - DOMAIN=__WRITE_YOUR_CALAMARI_DOMAIN_HERE__
+     - PROJECT=__WRITE_YOUR_CALAMARI_PROJECT_HERE__
+     - EMAIL=__WRITE_YOUR_EMAIL_HERE__
+     - PASSWORD=__WRITE_YOUR_PASSWORD_HERE__
+     - PUNCH_IN=0 9 * * 1-5
+     - PUNCH_OUT=0 18 * * 1-5
+     - TIMEZONE=Europe/Madrid

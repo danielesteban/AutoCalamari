@@ -1,0 +1,13 @@
+{
+  "name": "autocalamari",
+  "version": "1.0.0",
+  "author": "Daniel Esteban Nombela",
+  "description": "Automated Calamari Clock-In/Out",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "cron": "^1.7.0",
+    "dotenv": "^7.0.0",
+    "puppeteer": "^1.14.0"
+  }
+}
