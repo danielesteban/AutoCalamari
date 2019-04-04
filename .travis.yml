@@ -1,11 +1,13 @@
 language: generic
+env:
+-secure: KaO9TbYuc5ZQ+BQHo3hSrNJM+VKoR58aJ6P2Cpt9iGFMi88UzLus0XAFSnqbJA40JCBC5YD04Ov23XuI0J0tCzwHR+dTIJauwYWjKTBgzZvJzT5y+YSZqQrFh7RrChNMP5YrhhqZvz/jVPrkkHhUgSTezFnBGzcuEcDnkb4Rhcy02y6vh3jIZlfppWZsnStjmsNWsL6URU8jECFetrt3T0pFB3J0pI4vJkaVUMAN4LXNxNm+FeLZfcx38btxP+QDv4ndynFHyUdelBiVTGJFadC8HPeVu7D5/oaULHUIMpFMcVAx+R9Okl68AM0f5FjL3uD2YaswxKv+JOaP1PgBtY6L1tJuJxEq4vvT6oJGv+/tT0ls822yO0EZJl9wZLscm1tJr5K1mrSaBOElKNhdva9mLLDZ+2z4xFCxbPlRbT/uMyUwatjVzfhlDNG/uM4CnlEXtAwiNJW9xvxLJ85oWwKISMO11LwC+biQdo0xcyj0TmEL51xh3lcLfCoSTXKBlrMs9CLcfYdJtLlkF7agmyI+OCS4YQQcJ8CeLnM4RIICzqLg4MDvLkEnFS2PaODv1X8u8nP4c2ItzMl+VVIoplDaBX+5iZCHShbFmtPomFBi3LbL5I6HNGCqzHDYl2T5I4lUWAjC9w1BaABKXqi4hXGX81/cYYNyuFJiM1H9G1M=
 services:
 - docker
 script:
 - docker build -t danigatunes/autocalamari .
-# deploy:
-#   on:
-#     branch: master
-#   provider: script
-#   script: echo ${DOCKER_PASSWORD} | docker login -u danigatunes --password-stdin && docker push danigatunes/autocalamari  
-#   skip_cleanup: true
+deploy:
+  on:
+    branch: master
+  provider: script
+  script: echo ${DOCKER_PASSWORD} | docker login -u danigatunes --password-stdin && docker push danigatunes/autocalamari  
+  skip_cleanup: true
