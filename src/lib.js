@@ -26,9 +26,8 @@ const launchCalamari = ({
   email,
   password,
   headless,
-}) => {
-  console.log(colors.blue(`Logging into ${domain}.calamari.io...`));
-  return puppeteer
+}) => (
+  puppeteer
     .launch({
       args: ['--no-sandbox'],
       headless,
@@ -74,15 +73,15 @@ const launchCalamari = ({
               page,
             }))
         ))
-    ));
-};
+    ))
+);
 
 const punchIn = ({
   page,
   project,
   timezone,
 }) => {
-  console.log(colors.yellow(`Clock-in: ${now(timezone)}`));
+  console.log(colors.yellow(`[${now(timezone)}] Punch-In`));
   const projectLink = `//a[contains(text(), ${JSON.stringify(project)})]`;
   return Promise.all([
     page.$('button#buttonShift.startWork'),
@@ -116,7 +115,7 @@ const punchOut = ({
   page,
   timezone,
 }) => {
-  console.log(colors.green(`Clock-out: ${now(timezone)}`));
+  console.log(colors.green(`[${now(timezone)}] Punch-Out\n`));
   return Promise.all([
     page.$('button#buttonShift.stopWork'),
     page.$('button#buttonBreak.stopBreak'),
@@ -142,7 +141,7 @@ const startBreak = ({
   project,
   timezone,
 }) => {
-  console.log(colors.green(`Start break: ${now(timezone)}`));
+  console.log(colors.green(`[${now(timezone)}] Start break`));
   return Promise.all([
     page.$('button#buttonBreak.stopBreak'),
     page.$('button#buttonShift.startWork'),
@@ -168,7 +167,7 @@ const stopBreak = ({
   project,
   timezone,
 }) => {
-  console.log(colors.yellow(`Stop break: ${now(timezone)}`));
+  console.log(colors.yellow(`[${now(timezone)}] Stop break`));
   return Promise.all([
     page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.stopBreak'),
@@ -188,22 +187,22 @@ const stopBreak = ({
 const actions = config => ([
   ...(config.punchIn ? [{
     action: punchIn,
-    desc: colors.green('Punching-in at:   '),
+    desc: colors.yellow('Punch-in at:   '),
     time: config.punchIn,
   }] : []),
   ...(config.startBreak ? [{
     action: startBreak,
-    desc: colors.yellow('Starting break at:'),
+    desc: colors.green('Start break at:'),
     time: config.startBreak,
   }] : []),
   ...(config.stopBreak ? [{
     action: stopBreak,
-    desc: colors.green('Stopping break at:'),
+    desc: colors.yellow('Stop break at: '),
     time: config.stopBreak,
   }] : []),
   ...(config.punchOut ? [{
     action: punchOut,
-    desc: colors.yellow('Punching-out at:  '),
+    desc: colors.green('Punch-out at:  '),
     time: config.punchOut,
   }] : []),
 ]);
