@@ -1,6 +1,10 @@
 const { CronJob } = require('cron');
 const puppeteer = require('puppeteer');
 
+const now = (timezone) => (
+  (new Date()).toLocaleString('en-US', { timeZone: timezone })
+);
+
 const typeValue = (page, selector, value) => (
   page
     .$(selector)
@@ -66,8 +70,9 @@ const launchCalamari = ({
 module.exports.punchIn = ({
   page,
   project,
+  timezone,
 }) => {
-  console.log(`Clock-in: ${new Date()}`);
+  console.log(`Clock-in: ${now(timezone)}`);
   const projectLink = `//a[contains(text(), ${JSON.stringify(project)})]`;
   return page
     .$('button#buttonShift.startWork')
@@ -91,8 +96,8 @@ module.exports.punchIn = ({
     });
 };
 
-module.exports.punchOut = ({ page }) => {
-  console.log(`Clock-out: ${new Date()}`);
+module.exports.punchOut = ({ page, timezone }) => {
+  console.log(`Clock-out: ${now(timezone)}`);
   return page
     .$('button#buttonShift.stopWork')
     .then((button) => {

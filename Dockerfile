@@ -10,9 +10,6 @@ RUN apt-get -qq update && \
 ENV NODE_ENV=production
 RUN yarn global add forever
 
-# Set the timezone
-RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Madrid /etc/localtime
-
 # Create working directory
 RUN mkdir -p /usr/src/autocalamari
 WORKDIR /usr/src/autocalamari
