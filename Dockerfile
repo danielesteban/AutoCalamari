@@ -25,5 +25,5 @@ COPY src/ src/
 # De-escalate privileges
 USER node
 
-# Start server
+# Start worker
 CMD [ "forever", "src/index.js" ]

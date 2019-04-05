@@ -21,6 +21,7 @@
     "pre-commit": "^1.2.2"
   },
   "pre-commit": {
-    "run": "lint"
+    "run": "lint",
+    "silent": true
   }
 }

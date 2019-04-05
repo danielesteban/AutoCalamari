@@ -1,10 +1,6 @@
 const colors = require('colors/safe');
 const dotenv = require('dotenv');
-const {
-  punchIn,
-  punchOut,
-  setupJob,
-} = require('./lib.js');
+const setupCronJobs = require('./lib.js');
 
 dotenv.config();
 
@@ -14,25 +10,30 @@ const config = {
   email: process.env.EMAIL,
   password: process.env.PASSWORD,
   punchIn: process.env.PUNCH_IN,
+  startBreak: process.env.START_BREAK,
+  stopBreak: process.env.STOP_BREAK,
   punchOut: process.env.PUNCH_OUT,
   entropy: parseInt(process.env.ENTROPY || 0, 10),
   timezone: process.env.TIMEZONE || 'Europe/Madrid',
   headless: process.env.HEADLESS !== 'false',
 };
 
-console.log(colors.blue('Automation FTW!'));
-console.log(colors.white(`${config.email}`));
+if (!config.domain || !config.project || !config.email || !config.password) {
+  console.error(colors.red('Error: You must provide a domain, project, email & password'));
+  process.exit(1);
+}
 
-console.log(colors.green(`Punching in at: ${config.punchIn}`));
-setupJob({
-  time: config.punchIn,
-  action: punchIn,
-  config,
-});
-
-console.log(colors.yellow(`Punching out at: ${config.punchOut}`));
-setupJob({
-  time: config.punchOut,
-  action: punchOut,
-  config,
-});
+console.log([
+  '',
+  colors.rainbow(' AutoCalamari '),
+  colors.rainbow('========================='),
+  `${colors.white('Email:')}    ${colors.blue(config.email)}`,
+  `${colors.white('Domain:')}   ${colors.blue(`${config.domain}.calamari.io`)}`,
+  `${colors.white('Project:')}  ${colors.blue(config.project)}`,
+  ...(config.entropy > 0 ? [
+    `${colors.white('Entropy:')}  ${colors.blue(`~${Math.floor(config.entropy / 60)} minutes`)}`,
+  ] : []),
+  '',
+].join('\n'));
+setupCronJobs(config);
+console.log('');

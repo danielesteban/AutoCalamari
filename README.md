@@ -15,7 +15,7 @@ mkdir AutoCalamari && cd AutoCalamari
 curl -O https://raw.githubusercontent.com/danielesteban/AutoCalamari/master/docker-compose.yml
 # Edit the environment config
 vim docker-compose.yml
-# Start the server
+# Start the service
 docker-compose up -d
 ```
 
@@ -27,9 +27,11 @@ echo "DOMAIN=__WRITE_YOUR_CALAMARI_SUBDOMAIN_HERE__" > .env
 echo "PROJECT=__WRITE_YOUR_CALAMARI_PROJECT_HERE__" >> .env
 echo "EMAIL=__WRITE_YOUR_EMAIL_HERE__" >> .env
 echo "PASSWORD=__WRITE_YOUR_PASSWORD_HERE__" >> .env
-echo "PUNCH_IN=0 9 * * 1-5" >> .env
-echo "PUNCH_OUT=0 18 * * 1-5" >> .env
+echo "PUNCH_IN=00 09 * * 1-5" >> .env
+echo "START_BREAK=00 14 * * 1-5" >> .env
+echo "STOP_BREAK=00 15 * * 1-5" >> .env
+echo "PUNCH_OUT=00 18 * * 1-5" >> .env
 echo "HEADLESS=false" >> .env
-# Start the server
+# Start the worker
 node src/index.js
 ```
