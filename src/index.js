@@ -17,7 +17,7 @@ const config = {
   punchOut: process.env.PUNCH_OUT,
   entropy: parseInt(process.env.ENTROPY || 0, 10),
   timezone: process.env.TIMEZONE || 'Europe/Madrid',
-  headless: process.env.HEADLESS === 'false' ? false : true,
+  headless: process.env.HEADLESS !== 'false',
 };
 
 console.log(colors.blue('Automation FTW!'));

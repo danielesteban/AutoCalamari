@@ -1,14 +1,14 @@
 const { CronJob } = require('cron');
 const puppeteer = require('puppeteer');
 
-const now = (timezone) => (
+const now = timezone => (
   (new Date()).toLocaleString('en-US', { timeZone: timezone })
 );
 
 const typeValue = (page, selector, value) => (
   page
     .$(selector)
-    .then((e) => (
+    .then(e => (
       e.click()
     ))
     .then(() => (
@@ -37,7 +37,7 @@ const launchCalamari = ({
             .goto(`https://${domain}.calamari.io/clockin/main.do`, { waitUntil: 'networkidle2' })
             .then(() => (
               page
-                .waitFor('input[name=email]')
+                .waitForSelector('input[name=email]')
             ))
             .then(() => (
               typeValue(page, 'input[name=email]', email)
@@ -51,18 +51,16 @@ const launchCalamari = ({
             ))
             .then(() => (
               page
-                .waitFor('button#buttonShift')
+                .waitForSelector('button#buttonShift')
             ))
             .then(() => (
               page
-                .waitFor(() => (
-                  !document.querySelector('#applicationPreloader')
-                ))
+                .waitForFunction('!document.querySelector("#applicationPreloader")')
             ))
             .then(() => ({
               browser,
               page,
-            }))
+            }));
         })
     ));
 };
