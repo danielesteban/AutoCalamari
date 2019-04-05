@@ -5,6 +5,7 @@ AutoCalamari
 
 [![Build Status](https://travis-ci.org/danielesteban/AutoCalamari.svg?branch=master)](https://travis-ci.org/danielesteban/AutoCalamari)
 [![dependencies Status](https://david-dm.org/danielesteban/AutoCalamari/status.svg)](https://david-dm.org/danielesteban/AutoCalamari)
+[![Docker Pulls](https://img.shields.io/docker/pulls/danigatunes/autocalamari.svg)](https://hub.docker.com/r/danigatunes/autocalamari)
 
 
 #### Headless service deployment
