@@ -35,3 +35,28 @@ echo "HEADLESS=false" >> .env
 # Start the worker
 node src/index.js
 ```
+
+#### FAQ
+
+ * [What's the job scheduling format?](#whats-the-job-scheduling-format)
+ * [What's my calamari password?](#whats-my-calamari-password)
+ * [What's my calamari project?](#whats-my-calamari-project)
+ * [What's my calamari domain?](#whats-my-calamari-domain)
+
+##### What's the job scheduling format?
+
+[Read up on cron patterns here](http://crontab.org/). Note the examples in the link have five fields, and 1 minute as the finest granularity, but this project has six fields, with 1 second as the finest granularity.
+
+There are also tools that will help you construct your schedules like: [crontab.guru](https://crontab.guru/) and [cronjob.xyz](https://cronjob.xyz/).
+
+##### What's my calamari password?
+
+If you signed-up with your google account or you don't know/remember your password, you can use the [Password Reset Form](https://app.calamari.io/o/remind-password) to get a new one.
+
+##### What's my calamari project?
+
+The text that reads on any of the buttons that pop up when you start a work shift.
+
+##### What's my calamari domain?
+
+The part before '.calamari.io' in your calamari URL
