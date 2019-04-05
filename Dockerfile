@@ -26,11 +26,4 @@ COPY src/ src/
 USER node
 
 # Start worker
-CMD [
-  "forever",
-  "--minUptime",
-  "1000",
-  "--spinSleepTime",
-  "1000",
-  "src/index.js"
-]
+CMD ["forever", "--minUptime", "1000", "--spinSleepTime", "1000", "src/index.js"]
