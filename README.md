@@ -57,13 +57,13 @@ yarn start
 
 ##### What's the job scheduling format?
 
-[Read up on cron patterns here](http://crontab.org/). Note the examples in the link have five fields, and 1 minute as the finest granularity, but this project has six fields, with 1 second as the finest granularity.
+[Read up on cron patterns here](http://crontab.org/). Note the examples in the link have five fields and 1 minute as the finest granularity, but this project has six fields with 1 second as the finest granularity.
 
 There are also tools that will help you construct your schedules like: [crontab.guru](https://crontab.guru/) and [cronjob.xyz](https://cronjob.xyz/).
 
 ##### What's my calamari domain?
 
-The part before '.calamari.io' in your calamari URL.
+The part before `.calamari.io` in your calamari URL.
 
 ##### What's my calamari password?
 
