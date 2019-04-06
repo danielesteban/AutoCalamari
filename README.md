@@ -22,7 +22,14 @@ docker-compose up -d
 
 #### Dev environment
 
+ * [Node.js](https://nodejs.org/en/download/) >= 10.15.3 LTS
+ * [Yarn](https://yarnpkg.com/en/docs/install) >= 1.15.2 Stable
+
 ```bash
+# Clone this repo
+git clone https://github.com/danielesteban/AutoCalamari.git && cd AutoCalamari
+# Install dependencies
+yarn install
 # Setup your environment
 echo "DOMAIN=__WRITE_YOUR_CALAMARI_SUBDOMAIN_HERE__" > .env
 echo "PROJECT=__WRITE_YOUR_CALAMARI_PROJECT_HERE__" >> .env
@@ -34,7 +41,7 @@ echo "STOP_BREAK=00 15 * * 1-5" >> .env
 echo "PUNCH_OUT=00 18 * * 1-5" >> .env
 echo "HEADLESS=false" >> .env
 # Start the worker
-node src/index.js
+yarn start
 ```
 
 #### FAQ
