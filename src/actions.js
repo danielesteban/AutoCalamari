@@ -17,7 +17,6 @@ const punchIn = ({
   timezone,
 }) => {
   log('Punch-In', 'red', timezone);
-  const projectLink = `//a[contains(text(), ${JSON.stringify(project)})]`;
   return Promise.all([
     page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.stopBreak'),
@@ -34,7 +33,10 @@ const punchIn = ({
         .click()
         .then(() => (
           page
-            .waitForXPath(projectLink, { visible: true })
+            .waitForXPath(
+              `//a[contains(text(), ${JSON.stringify(project)})]`,
+              { visible: true }
+            )
         ))
         .then(link => (
           link.click()
