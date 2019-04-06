@@ -6,7 +6,7 @@ dotenv.config();
 
 const config = {
   domain: process.env.DOMAIN,
-  project: process.env.PROJECT,
+  project: process.env.PROJECT || 'Without project',
   email: process.env.EMAIL,
   password: process.env.PASSWORD,
   punchIn: process.env.PUNCH_IN,
@@ -18,8 +18,8 @@ const config = {
   headless: process.env.HEADLESS !== 'false',
 };
 
-if (!config.domain || !config.project || !config.email || !config.password) {
-  console.error(colors.red('Error: You must provide a domain, project, email & password'));
+if (!config.domain || !config.email || !config.password) {
+  console.error(colors.red('Error: You must provide a domain, email & password'));
   process.exit(1);
 }
 
@@ -35,5 +35,5 @@ console.log([
   ] : []),
   '',
 ].join('\n'));
+
 setupCronJobs(config);
-console.log('');
