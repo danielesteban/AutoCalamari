@@ -71,4 +71,6 @@ If you signed-up with your google account or you don't know/remember your passwo
 
 ##### What's my calamari project?
 
-The text that reads on any of the buttons that pop up when you start a work shift. If you don't provide any, it will default to: `Without project`.
+The text that reads on any of the buttons that pop up when you start a work shift.
+
+If you don't provide any, it will default to: `Without project`.
