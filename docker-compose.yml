@@ -8,10 +8,10 @@ services:
      - PROJECT=__WRITE_YOUR_CALAMARI_PROJECT_HERE__
      - EMAIL=__WRITE_YOUR_EMAIL_HERE__
      - PASSWORD=__WRITE_YOUR_PASSWORD_HERE__
-     - PUNCH_IN=00 09 * * 1-5
-     - START_BREAK=00 14 * * 1-5
-     - STOP_BREAK=00 15 * * 1-5
-     - PUNCH_OUT=00 18 * * 1-5
+     - PUNCH_IN=00 00 09 * * 1-5
+     - START_BREAK=00 00 14 * * 1-5
+     - STOP_BREAK=00 00 15 * * 1-5
+     - PUNCH_OUT=00 00 18 * * 1-5
      - ENTROPY=300
      - TIMEZONE=Europe/Madrid
      - TERM=xterm-256color
