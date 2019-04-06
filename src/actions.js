@@ -36,12 +36,8 @@ const punchIn = ({
           page
             .waitForXPath(projectLink, { visible: true })
         ))
-        .then(() => (
-          page
-            .$x(projectLink)
-            .then(([link]) => (
-              link.click()
-            ))
+        .then(link => (
+          link.click()
         ));
     });
 };
@@ -62,8 +58,10 @@ const punchOut = ({
       if (stopBreak) {
         return stopBreak
           .click()
-          .then(() => page.waitForSelector('button#buttonShift.stopWork'))
-          .then(() => page.$('button#buttonShift.stopWork'))
+          .then(() => (
+            page
+              .waitForSelector('button#buttonShift.stopWork')
+          ))
           .then(stopWork => stopWork.click());
       }
       return stopWork
@@ -78,19 +76,20 @@ const startBreak = ({
 }) => {
   log('Start break', 'green', timezone);
   return Promise.all([
-    page.$('button#buttonBreak.stopBreak'),
     page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.startBreak'),
   ])
-    .then(([stopBreak, startWork, startBreak]) => {
-      if (stopBreak) {
-        throw new Error('Already on a break');
-      }
+    .then(([startWork, startBreak]) => {
       if (startWork) {
         return punchIn({ page, project, timezone })
-          .then(() => page.waitForSelector('button#buttonBreak.startBreak'))
-          .then(() => page.$('button#buttonBreak.startBreak'))
+          .then(() => (
+            page
+              .waitForSelector('button#buttonBreak.startBreak')
+          ))
           .then(startBreak => startBreak.click());
+      }
+      if (!startBreak) {
+        throw new Error('Already on a break');
       }
       return startBreak
         .click();
