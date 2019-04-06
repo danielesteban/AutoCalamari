@@ -7,7 +7,6 @@ AutoCalamari
 [![dependencies Status](https://david-dm.org/danielesteban/AutoCalamari/status.svg)](https://david-dm.org/danielesteban/AutoCalamari)
 [![Docker Pulls](https://img.shields.io/docker/pulls/danigatunes/autocalamari.svg)](https://hub.docker.com/r/danigatunes/autocalamari)
 
-
 #### Headless service deployment
 
  * [Docker](https://hub.docker.com/search/?type=edition&offering=community) >= 18.09 Stable
@@ -22,6 +21,8 @@ vim docker-compose.yml
 # Start the service
 docker-compose up -d
 ```
+
+![Screenshot](screenshot.png)
 
 #### Dev environment
 
