@@ -108,7 +108,7 @@ module.exports = {
           .trim()
           .split(' ')
           .reduce((t, v) => (
-            `${t} ${colors[v === '*' ? 'blue' : 'gray'](v)}`
+            `${t} ${colors[v === '*' ? 'blue' : 'white'](v)}`
           ), '')
       );
       return new CronJob(
