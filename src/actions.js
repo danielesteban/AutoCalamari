@@ -18,16 +18,16 @@ const punchIn = ({
 }) => {
   log('Punch-In', 'red', timezone);
   return Promise.all([
-    page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.stopBreak'),
+    page.$('button#buttonShift.startWork'),
   ])
-    .then(([startWork, stopBreak]) => {
-      if (!startWork && !stopBreak) {
-        throw new Error('Already on a shift');
-      }
+    .then(([stopBreak, startWork]) => {
       if (stopBreak) {
         return stopBreak
           .click();
+      }
+      if (!startWork) {
+        throw new Error('Already on a shift');
       }
       return startWork
         .click()
@@ -50,13 +50,10 @@ const punchOut = ({
 }) => {
   log('Punch-Out', 'green', timezone);
   return Promise.all([
-    page.$('button#buttonShift.stopWork'),
     page.$('button#buttonBreak.stopBreak'),
+    page.$('button#buttonShift.stopWork'),
   ])
-    .then(([stopWork, stopBreak]) => {
-      if (!stopWork && !stopBreak) {
-        throw new Error('Not on a shift');
-      }
+    .then(([stopBreak, stopWork]) => {
       if (stopBreak) {
         return stopBreak
           .click()
@@ -65,6 +62,9 @@ const punchOut = ({
               .waitForSelector('button#buttonShift.stopWork')
           ))
           .then(stopWork => stopWork.click());
+      }
+      if (!stopWork) {
+        throw new Error('Not on a shift');
       }
       return stopWork
         .click();
