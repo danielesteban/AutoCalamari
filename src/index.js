@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const {
   printConfig,
   setupCronJobs,
-} = require('./autocalamari.js');
+} = require('./autocalamari');
 
 dotenv.config();
 
