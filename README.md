@@ -26,8 +26,8 @@ docker-compose up -d
 
 #### Dev environment
 
- * [Node.js](https://nodejs.org/en/download/) >= 10.15.3 LTS
- * [Yarn](https://yarnpkg.com/en/docs/install) >= 1.15.2 Stable
+ * [Node.js](https://nodejs.org/en/download/) >= 10.15 LTS
+ * [Yarn](https://yarnpkg.com/en/docs/install) >= 1.15 Stable
 
 ```bash
 # Clone this repo
