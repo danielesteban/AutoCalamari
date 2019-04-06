@@ -63,7 +63,7 @@ There are also tools that will help you construct your schedules like: [crontab.
 
 ##### What's my calamari domain?
 
-The part before '.calamari.io' in your calamari URL
+The part before '.calamari.io' in your calamari URL.
 
 ##### What's my calamari password?
 
