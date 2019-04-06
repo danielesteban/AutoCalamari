@@ -6,7 +6,7 @@ const actions = require('./actions');
 
 const MAX_UINT32 = (2 ** 32) - 1;
 const getRandomDelay = entropy => (
-  Math.floor((entropy * 1000) * Math.abs(
+  Math.floor((entropy * 1000) * (
     (new Uint32Array(crypto.randomBytes(Uint32Array.BYTES_PER_ELEMENT).buffer))[0] / MAX_UINT32
   ))
 );
