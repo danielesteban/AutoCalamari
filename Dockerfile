@@ -19,7 +19,7 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 
-# Bundle app source
+# Bundle worker source
 COPY src/ src/
 
 # De-escalate privileges
