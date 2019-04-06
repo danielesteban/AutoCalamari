@@ -10,6 +10,9 @@ AutoCalamari
 
 #### Headless service deployment
 
+ * [Docker](https://hub.docker.com/search/?type=edition&offering=community) >= 18.09 Stable
+ * [Docker Compose](https://docs.docker.com/compose/install/) >= 1.24 Stable
+
 ```bash
 # Download the docker-compose template
 mkdir AutoCalamari && cd AutoCalamari 
