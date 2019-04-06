@@ -1,7 +1,14 @@
 const colors = require('colors/safe');
 
-const now = timezone => (
-  (new Date()).toLocaleString('en-US', { timeZone: timezone })
+const log = (
+  action,
+  color,
+  timezone
+) => (
+  console.log(colors[color](
+    `[${(new Date()).toLocaleString('en-US', { timeZone: timezone })}]`,
+    action
+  ))
 );
 
 const punchIn = ({
@@ -9,7 +16,7 @@ const punchIn = ({
   project,
   timezone,
 }) => {
-  console.log(colors.yellow(`[${now(timezone)}] Punch-In`));
+  log('Punch-In', 'yellow', timezone);
   const projectLink = `//a[contains(text(), ${JSON.stringify(project)})]`;
   return Promise.all([
     page.$('button#buttonShift.startWork'),
@@ -43,7 +50,7 @@ const punchOut = ({
   page,
   timezone,
 }) => {
-  console.log(colors.green(`[${now(timezone)}] Punch-Out\n`));
+  log('Punch-Out', 'green', timezone);
   return Promise.all([
     page.$('button#buttonShift.stopWork'),
     page.$('button#buttonBreak.stopBreak'),
@@ -69,7 +76,7 @@ const startBreak = ({
   project,
   timezone,
 }) => {
-  console.log(colors.green(`[${now(timezone)}] Start break`));
+  log('Start break', 'green', timezone);
   return Promise.all([
     page.$('button#buttonBreak.stopBreak'),
     page.$('button#buttonShift.startWork'),
@@ -95,7 +102,7 @@ const stopBreak = ({
   project,
   timezone,
 }) => {
-  console.log(colors.yellow(`[${now(timezone)}] Stop break`));
+  log('Stop break', 'yellow', timezone);
   return Promise.all([
     page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.stopBreak'),

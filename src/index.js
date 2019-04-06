@@ -1,6 +1,9 @@
 const colors = require('colors/safe');
 const dotenv = require('dotenv');
-const setupCronJobs = require('./lib.js');
+const {
+  printConfig,
+  setupCronJobs,
+} = require('./autocalamari.js');
 
 dotenv.config();
 
@@ -23,17 +26,5 @@ if (!config.domain || !config.email || !config.password) {
   process.exit(1);
 }
 
-console.log([
-  '',
-  colors.rainbow(' AutoCalamari '),
-  colors.rainbow('========================='),
-  `${colors.white('Email:')}    ${colors.blue(config.email)}`,
-  `${colors.white('Domain:')}   ${colors.blue(`${config.domain}.calamari.io`)}`,
-  `${colors.white('Project:')}  ${colors.blue(config.project)}`,
-  ...(config.entropy > 0 ? [
-    `${colors.white('Entropy:')}  ${colors.blue(`~${Math.floor(config.entropy / 60)} minutes`)}`,
-  ] : []),
-  '',
-].join('\n'));
-
+printConfig(config);
 setupCronJobs(config);
