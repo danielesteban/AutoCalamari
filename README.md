@@ -1,13 +1,13 @@
 AutoCalamari
 ===
 
-> Automated Calamari Clock-In/Out
-
 [![Build Status](https://travis-ci.org/danielesteban/AutoCalamari.svg?branch=master)](https://travis-ci.org/danielesteban/AutoCalamari)
 [![Dependencies Status](https://david-dm.org/danielesteban/AutoCalamari/status.svg)](https://david-dm.org/danielesteban/AutoCalamari)
 [![Docker Pulls](https://img.shields.io/docker/pulls/danigatunes/autocalamari.svg)](https://hub.docker.com/r/danigatunes/autocalamari)
 
-#### Headless service deployment
+> Automated Calamari Clock-In/Out
+
+## Headless service deployment
 
  * [Docker](https://hub.docker.com/search/?type=edition&offering=community) >= 18.09 Stable
  * [Docker Compose](https://docs.docker.com/compose/install/) >= 1.24 Stable
@@ -24,7 +24,7 @@ docker-compose up -d
 
 [![Screenshot](screenshot.png)](https://hub.docker.com/r/danigatunes/autocalamari)
 
-#### Dev environment
+## Dev environment
 
  * [Node.js](https://nodejs.org/en/download/) >= 10.15 LTS
  * [Yarn](https://yarnpkg.com/en/docs/install) >= 1.15 Stable
@@ -48,28 +48,28 @@ echo "HEADLESS=false" >> .env
 yarn start
 ```
 
-#### FAQ
+## FAQ
 
  * [What's the job scheduling format?](#whats-the-job-scheduling-format)
  * [What's my calamari domain?](#whats-my-calamari-domain)
  * [What's my calamari password?](#whats-my-calamari-password)
  * [What's my calamari project?](#whats-my-calamari-project)
 
-##### What's the job scheduling format?
+#### What's the job scheduling format?
 
 [Read up on cron patterns here](http://crontab.org/). Note the examples in the link have five fields and 1 minute as the finest granularity, but this project has six fields with 1 second as the finest granularity.
 
 There are also tools that will help you construct your schedules like: [crontab.guru](https://crontab.guru/) and [cronjob.xyz](https://cronjob.xyz/).
 
-##### What's my calamari domain?
+#### What's my calamari domain?
 
 The part before `.calamari.io` in your calamari URL.
 
-##### What's my calamari password?
+#### What's my calamari password?
 
 If you signed-up with your google account or you don't know/remember your password, you can use the [Password Reset Form](https://app.calamari.io/o/remind-password) to get a new one.
 
-##### What's my calamari project?
+#### What's my calamari project?
 
 The text that reads on any of the buttons that pop up when you start a work shift.
 
