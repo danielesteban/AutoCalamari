@@ -115,7 +115,7 @@ module.exports = {
         time,
         () => setTimeout(() => (
           launchCalamari(config)
-            .then(({ browser, page }) => {
+            .then(({ browser, page }) => (
               action({
                 ...config,
                 page,
@@ -128,8 +128,8 @@ module.exports = {
                 ))
                 .finally(() => (
                   browser.close()
-                ));
-            })
+                ))
+            ))
         ), getRandomDelay(config.entropy)),
         null,
         true,
