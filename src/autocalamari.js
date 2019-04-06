@@ -26,13 +26,17 @@ const typeValue = ({
     ))
 );
 
-const launchCalamari = ({
-  domain,
-  email,
-  password,
-  headless,
-}) => (
-  puppeteer
+const execute = ({
+  action,
+  config,
+}) => {
+  const {
+    domain,
+    email,
+    password,
+    headless,
+  } = config;
+  return puppeteer
     .launch({
       args: ['--no-sandbox'],
       headless,
@@ -41,8 +45,12 @@ const launchCalamari = ({
       browser
         .pages()
         .then(([page]) => (
+          // Log-in
           page
-            .goto(`https://${domain}.calamari.io/clockin/main.do`, { waitUntil: 'networkidle2' })
+            .goto(
+              `https://${domain}.calamari.io/clockin/main.do`,
+              { waitUntil: 'networkidle2' }
+            )
             .then(() => (
               page
                 .waitForSelector('input[name=email]')
@@ -65,6 +73,7 @@ const launchCalamari = ({
               page
                 .click('button[type="submit"]')
             ))
+            // Wait until the page it's ready
             .then(() => (
               page
                 .waitForSelector('button#buttonShift')
@@ -73,13 +82,26 @@ const launchCalamari = ({
               page
                 .waitForFunction('!document.querySelector("#applicationPreloader")')
             ))
-            .then(() => ({
-              browser,
-              page,
-            }))
+            // Execute the action
+            .then(() => (
+              action({
+                ...config,
+                page,
+              })
+            ))
+            // Wait a sec before closing the browser
+            .then(() => (
+              page.waitFor(1000)
+            ))
         ))
-    ))
-);
+        .catch(e => (
+          console.error(colors.yellow(`Error: ${e.message}`))
+        ))
+        .finally(() => (
+          browser.close()
+        ))
+    ));
+};
 
 module.exports = {
   printConfig(config) {
@@ -111,29 +133,20 @@ module.exports = {
             `${t} ${colors[v === '*' ? 'blue' : 'white'](v)}`
           ), '')
       );
-      return new CronJob(
-        time,
-        () => setTimeout(() => (
-          launchCalamari(config)
-            .then(({ browser, page }) => (
-              action({
-                ...config,
-                page,
-              })
-                .then(() => (
-                  page.waitFor(1000)
-                ))
-                .catch(e => (
-                  console.error(colors.yellow(`Error: ${e.message}`))
-                ))
-                .finally(() => (
-                  browser.close()
-                ))
-            ))
-        ), getRandomDelay(config.entropy)),
-        null,
-        true,
-        config.timezone
+      return (
+        new CronJob(
+          time,
+          () => setTimeout(
+            () => execute({
+              action,
+              config,
+            }),
+            getRandomDelay(config.entropy)
+          ),
+          null,
+          true,
+          config.timezone
+        )
       );
     });
     console.log('');

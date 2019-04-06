@@ -88,7 +88,7 @@ const startBreak = ({
       }
       if (startWork) {
         return punchIn({ page, project, timezone })
-          .then(() => page.waitForSelector('button#buttonShift.startBreak'))
+          .then(() => page.waitForSelector('button#buttonBreak.startBreak'))
           .then(() => page.$('button#buttonBreak.startBreak'))
           .then(startBreak => startBreak.click());
       }
