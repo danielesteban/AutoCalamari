@@ -22,7 +22,7 @@ const config = {
 };
 
 if (!config.domain || !config.email || !config.password) {
-  console.error(colors.red('Error: You must provide a domain, email & password'));
+  console.error(colors.yellow('Error: You must provide a domain, email & password'));
   process.exit(1);
 }
 

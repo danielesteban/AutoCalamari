@@ -124,7 +124,7 @@ module.exports = {
                   page.waitFor(1000)
                 ))
                 .catch(e => (
-                  console.error(e.message)
+                  console.error(colors.yellow(`Error: ${e.message}`))
                 ))
                 .finally(() => (
                   browser.close()

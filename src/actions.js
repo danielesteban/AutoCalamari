@@ -16,7 +16,7 @@ const punchIn = ({
   project,
   timezone,
 }) => {
-  log('Punch-In', 'yellow', timezone);
+  log('Punch-In', 'red', timezone);
   const projectLink = `//a[contains(text(), ${JSON.stringify(project)})]`;
   return Promise.all([
     page.$('button#buttonShift.startWork'),
@@ -24,7 +24,7 @@ const punchIn = ({
   ])
     .then(([startWork, stopBreak]) => {
       if (!startWork && !stopBreak) {
-        throw new Error('Error: Already on a shift');
+        throw new Error('Already on a shift');
       }
       if (stopBreak) {
         return stopBreak
@@ -57,7 +57,7 @@ const punchOut = ({
   ])
     .then(([stopWork, stopBreak]) => {
       if (!stopWork && !stopBreak) {
-        throw new Error('Error: Not on a shift');
+        throw new Error('Not on a shift');
       }
       if (stopBreak) {
         return stopBreak
@@ -84,7 +84,7 @@ const startBreak = ({
   ])
     .then(([stopBreak, startWork, startBreak]) => {
       if (stopBreak) {
-        throw new Error('Error: Already on a break');
+        throw new Error('Already on a break');
       }
       if (startWork) {
         return punchIn({ page, project, timezone })
@@ -102,7 +102,7 @@ const stopBreak = ({
   project,
   timezone,
 }) => {
-  log('Stop break', 'yellow', timezone);
+  log('Stop break', 'red', timezone);
   return Promise.all([
     page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.stopBreak'),
@@ -112,7 +112,7 @@ const stopBreak = ({
         return punchIn({ page, project, timezone });
       }
       if (!stopBreak) {
-        throw new Error('Error: Not on a break');
+        throw new Error('Not on a break');
       }
       return stopBreak
         .click();
@@ -122,7 +122,7 @@ const stopBreak = ({
 module.exports = config => ([
   ...(config.punchIn ? [{
     action: punchIn,
-    desc: colors.yellow('Punch-in at:   '),
+    desc: colors.red('Punch-in at:   '),
     time: config.punchIn,
   }] : []),
   ...(config.startBreak ? [{
@@ -132,7 +132,7 @@ module.exports = config => ([
   }] : []),
   ...(config.stopBreak ? [{
     action: stopBreak,
-    desc: colors.yellow('Stop break at: '),
+    desc: colors.red('Stop break at: '),
     time: config.stopBreak,
   }] : []),
   ...(config.punchOut ? [{
