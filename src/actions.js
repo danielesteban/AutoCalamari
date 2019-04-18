@@ -18,10 +18,14 @@ const punchIn = ({
 }) => {
   log('Punch-In', 'red', timezone);
   return Promise.all([
+    page.$('c-label[name="workPlan.dayOff"]'),
     page.$('button#buttonBreak.stopBreak'),
     page.$('button#buttonShift.startWork'),
   ])
-    .then(([stopBreak, startWork]) => {
+    .then(([dayOff, stopBreak, startWork]) => {
+      if (dayOff) {
+        throw new Error('Day off');
+      }
       if (stopBreak) {
         return stopBreak
           .click();
@@ -78,10 +82,14 @@ const startBreak = ({
 }) => {
   log('Start break', 'green', timezone);
   return Promise.all([
+    page.$('c-label[name="workPlan.dayOff"]'),
     page.$('button#buttonShift.startWork'),
     page.$('button#buttonBreak.startBreak'),
   ])
-    .then(([startWork, startBreak]) => {
+    .then(([dayOff, startWork, startBreak]) => {
+      if (dayOff) {
+        throw new Error('Day off');
+      }
       if (startWork) {
         return punchIn({ page, project, timezone })
           .then(() => (
