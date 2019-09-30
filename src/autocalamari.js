@@ -80,7 +80,7 @@ const execute = ({
             ))
             .then(() => (
               page
-                .waitForFunction('!document.querySelector("#applicationPreloader")')
+                .waitFor(1000)
             ))
             // Execute the action
             .then(() => (
